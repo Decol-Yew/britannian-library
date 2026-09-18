@@ -115,8 +115,10 @@ header .sub .author{font-family:var(--serif-en)}
 
 /* title page */
 .page .titlepage{
-  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;padding-bottom:20px;
+  flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;
 }
+.page .titlepage::before{content:"";flex:1 1 0}
+.page .titlepage::after{content:"";flex:2 1 0}
 .page .titlepage .t{font-size:1.7rem;line-height:1.3}
 .page.left .titlepage .t{font-family:var(--serif-en)}
 .page.right .titlepage .t{font-family:var(--serif-ja);font-weight:500}
