@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Book / わたしの本 — UO NPC Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#3b2612;
+  --ink-soft:#6b4a2b;
+  --paper:#e6d6ad;
+  --paper-dark:#cdb98a;
+  --leather:#5b3a20;
+  --leather-dark:#2f1c0e;
+  --leather-light:#7c5330;
+  --gold:#c9a15a;
+  --serif-en:"IM Fell English","Palatino Linotype","Book Antiqua",Georgia,serif;
+  --serif-ja:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","MS Mincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:#151009;
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(120,80,40,.28), rgba(0,0,0,0) 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .09 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  color:#d8c9a3;
+  font-family:var(--serif-ja);
+  padding:24px 12px 48px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+header{ text-align:center; }
+header h1{
+  font-family:var(--serif-en);font-weight:normal;font-size:1.35rem;margin:0;letter-spacing:.04em;color:var(--gold);
+}
+header .sub{font-size:.85rem;opacity:.75;margin-top:4px}
+header .back{display:inline-block;font-size:.78rem;color:var(--gold);opacity:.7;text-decoration:none;margin-bottom:8px;letter-spacing:.05em}
+header .back:hover{opacity:1;text-decoration:underline}
+header .sub .author{font-family:var(--serif-en)}
+
+/* ---- Book ---- */
+.book{
+  position:relative;
+  width:min(100%, 960px);
+  aspect-ratio: 960 / 580;
+  border-radius:14px 22px 22px 14px;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--leather-light), transparent 55%),
+    linear-gradient(135deg, var(--leather) 0%, #4a2e18 50%, var(--leather-dark) 100%);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.65),
+    0 4px 10px rgba(0,0,0,.6),
+    inset 0 0 0 3px rgba(0,0,0,.35),
+    inset 0 0 0 5px rgba(201,161,90,.25);
+  padding:26px 30px;
+  display:grid;
+  grid-template-columns:1fr 26px 1fr;
+  user-select:text;
+}
+.book::before{ /* leather grain */
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .16 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  mix-blend-mode:multiply;
+}
+.spine{
+  background:linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55));
+  border-radius:4px;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.8);
+}
+.page{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>"),
+    var(--paper);
+  color:var(--ink);
+  padding:38px 42px 46px;
+  overflow:hidden;
+  box-shadow: inset 0 0 40px rgba(120,80,30,.35), 0 0 2px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;
+}
+.page.left{
+  border-radius:6px 2px 2px 6px;
+  background-image:
+    linear-gradient(90deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page.right{
+  border-radius:2px 6px 6px 2px;
+  background-image:
+    linear-gradient(270deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page .lang{
+  position:absolute;top:12px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;
+  font-family:var(--serif-en);
+}
+.page.left .lang{left:42px}
+.page.right .lang{right:42px}
+.page .body{flex:1;overflow:auto;scrollbar-width:thin}
+.page.left .body{font-family:var(--serif-en);font-size:1.58rem;line-height:1.5}
+.page.right .body{font-family:var(--serif-ja);font-size:1.28rem;line-height:1.9;font-weight:500}
+.page p{margin:0 0 .55em;text-indent:1.4em;text-wrap:pretty}
+.page p.cont{text-indent:0}
+.page.right p{text-indent:1em}
+.page .num{
+  position:absolute;bottom:16px;font-family:var(--serif-en);font-size:.85rem;color:var(--ink-soft);
+}
+.page.left .num{left:42px}
+.page.right .num{right:42px}
+
+/* title page */
+.page .titlepage{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;padding-bottom:20px;
+}
+.page .titlepage .t{font-size:1.7rem;line-height:1.3}
+.page.left .titlepage .t{font-family:var(--serif-en)}
+.page.right .titlepage .t{font-family:var(--serif-ja);font-weight:500}
+.page .titlepage .by{font-size:1rem;color:var(--ink-soft)}
+.page.left .titlepage .by{font-family:var(--serif-en);font-style:italic}
+.page .titlepage .rule{width:40%;height:1px;background:linear-gradient(90deg,transparent,var(--ink-soft),transparent);opacity:.7}
+
+/* brass corner fittings (top, decorative) */
+.corner{position:absolute;top:0;width:64px;height:64px;pointer-events:none;opacity:.95;z-index:2;filter:drop-shadow(1px 1px 2px rgba(0,0,0,.5))}
+.corner.tl{left:0}
+.corner.tr{right:0;transform:scaleX(-1)}
+.corner svg{width:100%;height:100%;display:block}
+
+/* page-turn corners (UO style) */
+.turn{
+  position:absolute;bottom:0;width:64px;height:64px;border:0;background:none;cursor:pointer;padding:0;z-index:2;filter:drop-shadow(1px -1px 2px rgba(0,0,0,.5));
+  opacity:.85;transition:opacity .15s, transform .15s;
+}
+.turn:hover{opacity:1;transform:scale(1.05)}
+.turn:disabled{opacity:.55;cursor:default;transform:none;filter:saturate(.4)}
+.turn:disabled path:nth-last-child(-n+2){opacity:.15}
+.turn.prev{left:0}
+.turn.next{right:0}
+.turn svg{width:100%;height:100%;display:block}
+
+/* controls */
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:.85rem}
+.controls button{
+  font:inherit;font-family:var(--serif-ja);color:#e8d7ab;background:linear-gradient(180deg,#5b3a20,#3a2312);
+  border:1px solid rgba(201,161,90,.55);border-radius:6px;padding:6px 14px;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.controls button:hover{background:linear-gradient(180deg,#6d4627,#432816)}
+.controls button:disabled{opacity:.35;cursor:default}
+.controls .pos{min-width:8em;text-align:center;font-family:var(--serif-en);letter-spacing:.05em}
+.hint{font-size:.72rem;opacity:.55}
+
+/* scroll (all pages) view */
+.all{display:none;width:min(100%,1040px);flex-direction:column;gap:16px}
+.all .spreadrow{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--paper);border-radius:6px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.5), inset 0 0 0 3px rgba(91,58,32,.9);
+}
+.all .cell{padding:26px 30px;color:var(--ink)}
+.all .cell.en{font-family:var(--serif-en);font-size:1.12rem;line-height:1.55;border-right:1px solid rgba(70,40,10,.25)}
+.all .cell.ja{font-family:var(--serif-ja);font-size:1rem;line-height:1.95;font-weight:500}
+.all .cell .pn{font-family:var(--serif-en);font-size:.75rem;color:var(--ink-soft);margin-bottom:8px}
+.all .cell p{margin:0 0 .5em;text-indent:1.2em}
+.all .cell p.cont{text-indent:0}
+body.mode-all .book{display:none}
+body.mode-all .all{display:flex}
+
+footer{font-size:.72rem;opacity:.5;text-align:center;max-width:70ch;line-height:1.6}
+
+@media (max-width:760px){
+  .book{aspect-ratio:auto;grid-template-columns:1fr;grid-template-rows:auto 14px auto;padding:18px 16px 60px;border-radius:14px}
+  .spine{background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55))}
+  .page{padding:34px 28px 46px;min-height:220px;border-radius:4px}
+  .page.left .lang,.page.left .num{left:28px}
+  .page.right .lang,.page.right .num{right:28px}
+  .page.left .body{font-size:1.18rem}
+  .page.right .body{font-size:1.08rem}
+  .all .spreadrow{grid-template-columns:1fr}
+  .all .cell.en{border-right:0;border-bottom:1px solid rgba(70,40,10,.25)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="../index.html">‹ 書架へ戻る</a>
+  <h1 id="h-title">My Book</h1>
+  <div class="sub">わたしの本 &nbsp;/&nbsp; <span class="author">Sherry the Mouse</span>（ねずみのシェリー）</div>
+</header>
+
+<div class="book" id="book">
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e9cf86"/><stop offset=".45" stop-color="#b8903f"/><stop offset=".6" stop-color="#d8b565"/><stop offset="1" stop-color="#7a5a22"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="corner tl" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <div class="corner tr" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <section class="page left" id="pageL">
+    <span class="lang">Original</span>
+    <div class="body" id="bodyL"></div>
+    <span class="num" id="numL"></span>
+  </section>
+  <div class="spine"></div>
+  <section class="page right" id="pageR">
+    <span class="lang">日本語訳</span>
+    <div class="body" id="bodyR"></div>
+    <span class="num" id="numR"></span>
+  </section>
+
+  <button class="turn prev" id="btnPrev" aria-label="前のページ" title="前のページ (←)">
+    <svg viewBox="0 0 64 64"><g transform="translate(0,64) scale(1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M24 38 L11 49 L24 60 Z" fill="#3a250c"/><path d="M22 42 L14 49 L22 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+  <button class="turn next" id="btnNext" aria-label="次のページ" title="次のページ (→)">
+    <svg viewBox="0 0 64 64"><g transform="translate(64,64) scale(-1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M40 38 L53 49 L40 60 Z" fill="#3a250c"/><path d="M42 42 L50 49 L42 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+</div>
+
+<div class="all" id="all"></div>
+
+<div class="controls">
+  <button id="cPrev">◀ 前へ</button>
+  <span class="pos" id="pos"></span>
+  <button id="cNext">次へ ▶</button>
+  <button id="cMode">全ページを縦に表示</button>
+</div>
+<div class="hint">← → キー、またはページ隅の折り返しでめくれます</div>
+
+<footer>
+  Original text: Ultima Online (1998) in-game book, extracted from the UO Demo server data (books/book00018.txt). 日本語訳は非公式な私訳です。
+</footer>
+
+<script>
+const BOOK = {"id": 18, "title": "My Book", "author": "Sherry the Mouse", "jaTitle": "わたしの本", "jaAuthor": "ねずみのシェリー", "pages": [["'Twas on a chill night, when the moon shone pasty-faced above the horizon, balanced on the towers of Lord British's castle, that the events I am about to relate took place, some years ago now. I witnessed them all from my tiny mousehole."], ["Milords British and Blackthorn are accustomed to a game of chess 'pon an evening, over which they argue the issues that affect the course of the realm. Lord Blackthorn was on his way to Lord British's chambers, and Lord British stood by a window casement, just having finished setting the pieces upon the board."], ["Suddenly the shutters blew open, and Lord British fell to the ground, one hand shielding his eyes. A chill wind entered the room, and it seemed a gash was torn in the very air."], ["Through the gash I could see stars and swirling clouds of stellar dust, and a coldness sucked all the warmth from the air. A terrible wind tossed books and blankets across the room, and furniture toppled."], ["From within this gash issued a great voice, unlike any I have ever heard. And these are the words it spoke (for I memorized them most carefully):"], ["\"Greetings, Lord British. I am the Time Lord, a being from beyond your dimension, as thou art from a world other than Sosaria. I am here to bring thee warning."], ["Dost thou recall how long ago a mysterious Stranger came to Sosaria and saved the world from the evil wizard Mondain? He shattered the Gem of Immortality, within which dwelled a perfect likeness of this world.\""], ["Lord British slowly stood and faced the hole in the air. \"I remember,\" he said. \"Oft have I wished that stranger would return.\""], ["\"He hath returned,\" spoke the voice. \"But not to here. When the Gem was shattered, a thousand shards were scattered across the dimensions, and in each shard there is a perfect likeness of this world."], ["And thou dost live upon one such shard, for thou art not of the true world-thou art merely a reflection.\""], ["Lord British looked shaken by this, and I did not know what to think! Was I merely a shadow of the real me, which lives still somewhere else across uncounted universes?"], ["\"My task is to heal this shattered world, Lord British,\" said the voice. \"And I seek to enlist thee in my cause. Be warned that in this case, healing carries with it a terrible price.\""], ["Concern warred with curiosity on my liege's face, but ever one to shoulder a burden, he straightened and faced the gash in the air bravely. \"Name thy price.\""], ["\"A shard of a universe is a powerful thing, and a universe shattered is always in danger from the powers of darkness. Already three shards were turned to evil, and sent to plague the original universe in the form of Shadowlords."], ["Many times have I brought the Stranger back to Britannia, to preserve it from its own folly or from outside dangers. Yet as long as the world remaineth in pieces, it remaineth vulnerable."], ["We must bring the shards into harmony, so that they resonate in such a manner that matches the original universe. Then the two universes shall merge, and be again as one.\""], ["\"But if we are only shadows...\" Lord British said wonderingly."], ["The light from the stars within the hole seemed to dim. \"Indeed, the reflections shall become one with the original. Thou wouldst cease to be as thou art, and become part of the larger you."], ["Thou shalt not die; however, uncounted generations have passed and borne children since that day, and they have no counterparts. They would perish utterly.\" Lord British sagged in shock, realizing the terrible price that would be paid to heal the universe. \"All of my people,\" he breathed.", "\"'Tis for the greater good.\""], ["Lord British bowed his head. 'Twas then I saw the movement by the door, half-hid by the heavy red curtains. Lord Blackthorn stood there, concealed from the rest of the room, his face white. How long had he been listening? I cannot say, yet I suspect that he had heard all that the mysterious voice had to say."], ["\"How then, shall I aid thee?\" Lord British said, weariness in his voice."], ["\"Aid the nobilty that resideth in the human heart. Protect the Virtues that so recently came to thee in thought late at night. They are the Virtues of life, as your counterpart understands them to be."], ["For when thy populace doth live and breathe these Virtues, shall it match the true Britannia, and thy shard shall rejoin with it.\""], ["The gash in the air began to close, and with it warmth stole back into the room.", "\"I was going to discuss my idea with Blackthorn tonight,\" Lord British breathed. \"Have I no thoughts that are my own? Is my life but a reflection of another me?\""], ["\"Nay,\" said the voice, smaller through the diminished opening. \"Say, rather, that you are parallel, for there is no guarantee that thou shalt accomplish what I have set thee to. I speak tonight to a thousand of thee, and ask the same of all. Perhaps not all shall seek to aid me.\""], ["And with that, the gash closed, and the voice was gone, leaving a room that appeare tossed by a mighty storm."], ["\"Destroy the world to save the universe,\" Lord British said bitterly. \"I do not wonder that some may balk.\""], ["Lord Blackthorn collected himself, and strode into the room, a decent mimicry of surprise on his face. \"My liege! What has happened here?\" he exclaimed, feigning dismay well. But not well enough to fool his old friend, whose eyes narrowed at seeing him there."], ["\"How much didst thou hear?\" demanded Lord British.", "\"Why, nothing,\" managed Blackthorn, his head ducked away from his friend, as he bent to retrieve the fallen chess pieces. \"I merely came for our game of chess.\""], ["Together they righted the table, and set the pieces upon the black and white squares. \"Such simplicity to the game, Blackthorn,\" mused Lord British, idly brushing one finger against the board. \"Black and white, each to its own color, as if life were so simple. What think you?\""], ["Blackthorn sat heavily on a hassock beside the chess table. \"I think that matters are never so simple, my liege. And that I would regret it deeply if someone, such as a friend, saw it thus.\""], ["Lord British's eyes met his. \"Yet sometimes one must sacrifice a pawn to save a king.\""], ["Lord Blackthorn met his gaze squarely. \"Even pawns have lives and loves at home, my lord.\" Then he reached out for a pawn, and firmly moved it forward two squares. \"Shall we play a game?\" he asked."], ["The chess game that night was a draw, and they played grimly."], ["And the next day, Lord British gathered the nobles to proclaim the idea of a new system of Virtues, and declared that shrines should be built across the land."], ["Lord Blackthorn opposed it bitterly, and many thought him strange for doing so, for ever had he been a noble and upright man, and ever had he and Lord British been in accord. Declaring that he should start his own shrine, he departed the castle that day to live in a tower in a lake on the north side of the city."], ["They are still the best of friends, yet a sadness hangs between them, as if they were forced into making choices that appealed not to them. And at night, when I creep softly from one corner of my liege's bedchamber to another, I sometimes see him take a pawn from his night table, and hold it in his hand, and quietly weep."], ["But I am but a mouse, and none hear me. This tale goes unknown, save for my writing these enormous letters with mine ink-stained tiny paws for thee to read, for I fear indeed for our world and for our people in these perilous times."]], "ja": [["それは肌寒い夜のことだった。青白い顔をした月が地平線の上、ロード・ブリティッシュの城の塔の上に釣り合うように浮かんでいた頃――これから語る出来事が起きたのは、今から数年前のことである。私はそのすべてを、自分の小さなねずみ穴から見届けた。"], ["ロード・ブリティッシュとロード・ブラックソーンは、夕べにチェスの一局を交わすのを常としており、その盤上で国の行く末に関わる諸問題を論じ合っていた。ロード・ブラックソーンがロード・ブリティッシュの居室へと向かう道すがら、ロード・ブリティッシュは窓辺に立ち、ちょうど盤上に駒を並べ終えたところだった。"], ["突然、鎧戸が吹き開き、ロード・ブリティッシュは片手で目を庇いながら床に倒れ込んだ。冷たい風が部屋に吹き込み、まるで空間そのものに裂け目が開いたかのようだった。"], ["その裂け目の向こうには、星々と渦巻く星屑の雲が見えた。そして冷気が部屋中の暖かさをすべて吸い取っていった。恐ろしい風が本や毛布を部屋中に吹き散らし、家具が倒れた。"], ["その裂け目の内側から、これまで耳にしたことのないような大きな声が響いた。そしてそれが語った言葉は、以下の通りである(私は細心の注意を払って一言一句記憶したのだ)。"], ["「ご機嫌よう、ロード・ブリティッシュ。私は時の主(タイム・ロード)、汝がソサリア以外の世界から来たのと同じように、汝の次元の外から来た存在である。私はここに、汝へ警告をもたらすために参った。"], ["遠い昔、謎めいた余所者がソサリアに現れ、邪悪な魔法使いモンディンからこの世界を救ったことを覚えておろうか？彼は不滅の宝珠を打ち砕いた――その中には、この世界の完璧な似姿が宿っていたのだ」"], ["ロード・ブリティッシュはゆっくりと立ち上がり、宙に開いた穴へと向き直った。「覚えている」と彼は言った。「あの余所者が再び戻ってくることを、幾度も願ったものだ」"], ["「彼は戻った」と声は語った。「だがここへではない。宝珠が砕けた時、千の欠片が諸次元へと散らばり、それぞれの欠片の中に、この世界の完璧な似姿が宿ったのだ。"], ["そして汝は、そうした欠片の一つの上に生きている――なぜなら汝は真の世界の者ではなく、単なる反映に過ぎぬのだから」"], ["ロード・ブリティッシュはこれに動揺したようだった。そして私も、何を考えればよいのか分からなかった！私もまた、数えきれぬ宇宙のどこかにまだ生きている本物の自分の、単なる影に過ぎないのだろうか？"], ["「我が務めは、この砕けた世界を癒すことにある、ロード・ブリティッシュよ」と声は言った。「そして私は、汝を我が大義に加えたいと望んでいる。ただし心得よ、この場合、癒しには恐ろしい代償が伴うということを」"], ["我が君主の顔には、懸念と好奇心とがせめぎ合っていたが、常に重荷を背負う覚悟のある彼は、身を正し、勇敢に宙の裂け目へと向き直った。「その代償を申せ」"], ["「一つの宇宙の欠片とは強大なものであり、砕かれた宇宙は常に闇の力の危険にさらされている。すでに三つの欠片が邪悪に転じ、シャドウロードという形で元の宇宙を苦しめるべく送り込まれた。"], ["私はこれまで幾度となく、余所者をブリタニアへと連れ戻し、その愚行や外なる危険からこれを守ってきた。しかし世界が砕けたままである限り、それは脆弱なままなのだ。"], ["我らは欠片たちを調和させ、元の宇宙と一致する形で共鳴するようにせねばならぬ。そうすれば二つの宇宙は融合し、再び一つとなるであろう」"], ["「しかし、我らが単なる影に過ぎぬのなら……」とロード・ブリティッシュは訝しげに言った。"], ["穴の中の星の光が翳ったように見えた。「いかにも、その反映は元のものと一つになるであろう。汝は今の汝としてはあり続けられず、より大きな汝の一部となるのだ。"], ["汝は死にはせぬ。しかし、あの日以来、数えきれぬ世代が過ぎ、子をなしてきた者たちには、対応する存在がおらぬ。彼らは完全に消え去るであろう」ロード・ブリティッシュは、宇宙を癒すために支払われる恐ろしい代償を悟り、衝撃に肩を落とした。「我が民すべてがか」と彼は息を呑んだ。", "「それがより大きな善のためなのだ」"], ["ロード・ブリティッシュはうなだれた。その時、私はドアのそばで動くものを見た――重い赤いカーテンに半ば隠れて。ロード・ブラックソーンがそこに立ち、部屋の残りの部分からは見えぬように身を潜め、その顔は蒼白だった。彼はどれほど長く聞き耳を立てていたのだろうか？私には分からない。だが、あの謎めいた声が語ったことをすべて聞いていたに違いないと、私は疑っている。"], ["「では、いかにして汝を助けようか？」ロード・ブリティッシュは、声に疲労をにじませて言った。"], ["「人の心の内に宿る高潔さを助けよ。つい先ごろ、夜更けに汝の思いの内に訪れた《徳》を守るのだ。それは生の徳であり、汝の対応者がそう理解しているものと同じである。"], ["なぜなら、汝の民がこれらの徳を生き、体現する時、それは真のブリタニアと一致し、汝の欠片はそれと再び結ばれるであろうから」"], ["宙の裂け目は閉じ始め、それとともに暖かさが部屋へと戻ってきた。", "「今宵、ブラックソーンとこの考えを話し合うつもりだったのだが」ロード・ブリティッシュはため息をついた。「私には己自身の考えというものがないのだろうか？私の人生は、別の私の反映に過ぎないのだろうか？」"], ["「いいや」と声は、小さくなった開口部を通して、より小さく答えた。「むしろ、汝らは並行する存在なのだと言おう。汝がわが課した務めを成し遂げるという保証はどこにもないのだから。私は今宵、千人の汝に語りかけ、そのすべてに同じことを頼んでいる。恐らく、すべての者が私を助けようとするわけではあるまい」"], ["そしてそれとともに裂け目は閉じ、声は消え去り、大嵐に見舞われたかのような部屋だけが残された。"], ["「世界を破壊して宇宙を救う、か」ロード・ブリティッシュは苦々しく言った。「ためらう者が出るのも無理はあるまい」"], ["ロード・ブラックソーンは気を取り直し、それなりにうまく驚きを装いながら部屋へと踏み込んだ。「陛下！ここで何が起きたのですか？」と彼は叫び、うまく狼狽を装ってみせた。しかし、旧き友の目をごまかすには十分ではなかった――その目は彼を見て細められた。"], ["「どれほど聞いていた？」ロード・ブリティッシュは詰め寄った。", "「いや、何も」ブラックソーンは、友から顔を背けながら、かろうじて言った。床に落ちたチェスの駒を拾い上げようと身をかがめつつ。「私はただ、我らのチェスの一局のために参っただけです」"], ["二人は共に卓を立て直し、白黒の升目に駒を並べた。「なんと単純な遊戯であることか、ブラックソーンよ」ロード・ブリティッシュは、指先で盤をそっと撫でながら物思いに耽った。「黒は黒、白は白、それぞれの色のままに――まるで人生がこれほど単純であるかのように。どう思う？」"], ["ブラックソーンはチェス卓のそばの椅子に重く腰を下ろした。「物事はそれほど単純ではないと、私は思いますよ、陛下。そして、もし誰か――例えば友のような者が――そう思い込んでいるとしたら、私は深く悔やむことでしょう」"], ["ロード・ブリティッシュの目が彼のそれと合った。「しかし時に、王を守るために歩を犠牲にせねばならぬこともある」"], ["ロード・ブラックソーンは真正面からその視線を受け止めた。「歩にも、家には命があり、愛する者がおります、陛下」そして彼は歩へと手を伸ばし、しっかりと二マス前へと進めた。「一局、いかがです？」と彼は尋ねた。"], ["その夜のチェスの一局は引き分けに終わり、二人は険しい面持ちで指し続けた。"], ["そして翌日、ロード・ブリティッシュは貴族たちを集め、新たな《徳》の体系という構想を宣言し、国中に聖堂を建てるべしと布告した。"], ["ロード・ブラックソーンはこれに激しく反対し、多くの者は彼を奇異に思った――彼は常に高潔で実直な人物であり、ロード・ブリティッシュとも常に意見を同じくしてきたからだ。彼は自らの聖堂を興すと宣言し、その日のうちに城を去り、街の北側にある湖の塔に住まうこととなった。"], ["二人は今もなお無二の親友のままだが、それでもなお、望みもせぬ選択を強いられたかのような哀しみが、二人の間に漂っている。そして夜、私が我が君主の寝室の片隅からもう一方の隅へとそっと這い進む時、彼が夜卓から歩の駒を取り、それを手の中に握りしめ、静かに涙するのを見かけることがある。"], ["しかし私はしがない一匹のねずみに過ぎず、誰も私の声を聞きはしない。この物語は誰にも知られぬまま――ただ、インクで汚れた小さな前足で、この大きな文字を汝のために書き記したことを除いては。この危うき時代において、我らが世界と我らが民のことを、私は本当に恐れているのだから。"]]};
+const N = BOOK.pages.length;         // number of text pages
+let spread = 0;                       // 0 = title page, 1..N = text pages
+const $ = id => document.getElementById(id);
+
+function paras(list){
+  return list.map((t,i)=>`<p class="${i===0 && !/^[A-Z"'“「]/.test(t.trim()) ? 'cont':''}">${esc(t)}</p>`).join('');
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function jaParas(list, enList){
+  // a JA page continues mid-sentence when the EN page does
+  return list.map((t,i)=>{
+    const cont = i===0 && enList && enList[0] && !/^[A-Z"'“「]/.test(enList[0].trim());
+    return `<p class="${cont?'cont':''}">${esc(t)}</p>`;
+  }).join('');
+}
+
+function render(){
+  const L=$('bodyL'), R=$('bodyR');
+  if(spread===0){
+    L.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.title)}</div><div class="rule"></div><div class="by">by ${esc(BOOK.author)}</div></div>`;
+    R.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.jaTitle)}</div><div class="rule"></div><div class="by">${esc(BOOK.jaAuthor)}</div></div>`;
+    $('numL').textContent=''; $('numR').textContent='';
+  }else{
+    const i=spread-1;
+    L.innerHTML=paras(BOOK.pages[i]);
+    R.innerHTML=jaParas(BOOK.ja[i], BOOK.pages[i]);
+    $('numL').textContent=`${spread} / ${N}`; $('numR').textContent=`${spread} / ${N}`;
+  }
+  $('btnPrev').disabled=$('cPrev').disabled=(spread===0);
+  $('btnNext').disabled=$('cNext').disabled=(spread===N);
+  $('pos').textContent= spread===0 ? 'Title' : `Page ${spread} / ${N}`;
+  L.scrollTop=0; R.scrollTop=0;
+  history.replaceState(null,'', spread===0 ? location.pathname : `#p${spread}`);
+}
+function go(d){ const s=Math.max(0,Math.min(N,spread+d)); if(s!==spread){spread=s;render();} }
+
+$('btnPrev').onclick=$('cPrev').onclick=()=>go(-1);
+$('btnNext').onclick=$('cNext').onclick=()=>go(1);
+document.addEventListener('keydown',e=>{
+  if(document.body.classList.contains('mode-all')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(1);e.preventDefault();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);e.preventDefault();}
+  if(e.key==='Home'){spread=0;render();}
+  if(e.key==='End'){spread=N;render();}
+});
+
+// build "all pages" view
+$('all').innerHTML = BOOK.pages.map((pg,i)=>`
+  <div class="spreadrow">
+    <div class="cell en"><div class="pn">Page ${i+1}</div>${paras(pg)}</div>
+    <div class="cell ja"><div class="pn">${i+1}ページ</div>${jaParas(BOOK.ja[i], pg)}</div>
+  </div>`).join('');
+
+$('cMode').onclick=()=>{
+  const all=document.body.classList.toggle('mode-all');
+  $('cMode').textContent= all ? '本の形で表示' : '全ページを縦に表示';
+  $('cPrev').style.visibility=$('cNext').style.visibility=$('pos').style.visibility= all?'hidden':'visible';
+};
+
+const m=location.hash.match(/^#p(\d+)$/); if(m) spread=Math.max(0,Math.min(N,+m[1]));
+render();
+</script>
+</body>
+</html>
