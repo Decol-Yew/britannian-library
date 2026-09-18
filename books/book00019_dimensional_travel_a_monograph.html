@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dimensional Travel: A Monograph / 次元間旅行論 — UO NPC Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#3b2612;
+  --ink-soft:#6b4a2b;
+  --paper:#e6d6ad;
+  --paper-dark:#cdb98a;
+  --leather:#5b3a20;
+  --leather-dark:#2f1c0e;
+  --leather-light:#7c5330;
+  --gold:#c9a15a;
+  --serif-en:"IM Fell English","Palatino Linotype","Book Antiqua",Georgia,serif;
+  --serif-ja:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","MS Mincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:#151009;
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(120,80,40,.28), rgba(0,0,0,0) 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .09 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  color:#d8c9a3;
+  font-family:var(--serif-ja);
+  padding:24px 12px 48px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+header{ text-align:center; }
+header h1{
+  font-family:var(--serif-en);font-weight:normal;font-size:1.35rem;margin:0;letter-spacing:.04em;color:var(--gold);
+}
+header .sub{font-size:.85rem;opacity:.75;margin-top:4px}
+header .back{display:inline-block;font-size:.78rem;color:var(--gold);opacity:.7;text-decoration:none;margin-bottom:8px;letter-spacing:.05em}
+header .back:hover{opacity:1;text-decoration:underline}
+header .sub .author{font-family:var(--serif-en)}
+
+/* ---- Book ---- */
+.book{
+  position:relative;
+  width:min(100%, 960px);
+  aspect-ratio: 960 / 580;
+  border-radius:14px 22px 22px 14px;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--leather-light), transparent 55%),
+    linear-gradient(135deg, var(--leather) 0%, #4a2e18 50%, var(--leather-dark) 100%);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.65),
+    0 4px 10px rgba(0,0,0,.6),
+    inset 0 0 0 3px rgba(0,0,0,.35),
+    inset 0 0 0 5px rgba(201,161,90,.25);
+  padding:26px 30px;
+  display:grid;
+  grid-template-columns:1fr 26px 1fr;
+  user-select:text;
+}
+.book::before{ /* leather grain */
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .16 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  mix-blend-mode:multiply;
+}
+.spine{
+  background:linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55));
+  border-radius:4px;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.8);
+}
+.page{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>"),
+    var(--paper);
+  color:var(--ink);
+  padding:38px 42px 46px;
+  overflow:hidden;
+  box-shadow: inset 0 0 40px rgba(120,80,30,.35), 0 0 2px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;
+}
+.page.left{
+  border-radius:6px 2px 2px 6px;
+  background-image:
+    linear-gradient(90deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page.right{
+  border-radius:2px 6px 6px 2px;
+  background-image:
+    linear-gradient(270deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page .lang{
+  position:absolute;top:12px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;
+  font-family:var(--serif-en);
+}
+.page.left .lang{left:42px}
+.page.right .lang{right:42px}
+.page .body{flex:1;overflow:auto;scrollbar-width:thin}
+.page.left .body{font-family:var(--serif-en);font-size:1.58rem;line-height:1.5}
+.page.right .body{font-family:var(--serif-ja);font-size:1.28rem;line-height:1.9;font-weight:500}
+.page p{margin:0 0 .55em;text-indent:1.4em;text-wrap:pretty}
+.page p.cont{text-indent:0}
+.page.right p{text-indent:1em}
+.page .num{
+  position:absolute;bottom:16px;font-family:var(--serif-en);font-size:.85rem;color:var(--ink-soft);
+}
+.page.left .num{left:42px}
+.page.right .num{right:42px}
+
+/* title page */
+.page .titlepage{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;padding-bottom:20px;
+}
+.page .titlepage .t{font-size:1.7rem;line-height:1.3}
+.page.left .titlepage .t{font-family:var(--serif-en)}
+.page.right .titlepage .t{font-family:var(--serif-ja);font-weight:500}
+.page .titlepage .by{font-size:1rem;color:var(--ink-soft)}
+.page.left .titlepage .by{font-family:var(--serif-en);font-style:italic}
+.page .titlepage .rule{width:40%;height:1px;background:linear-gradient(90deg,transparent,var(--ink-soft),transparent);opacity:.7}
+
+/* brass corner fittings (top, decorative) */
+.corner{position:absolute;top:0;width:64px;height:64px;pointer-events:none;opacity:.95;z-index:2;filter:drop-shadow(1px 1px 2px rgba(0,0,0,.5))}
+.corner.tl{left:0}
+.corner.tr{right:0;transform:scaleX(-1)}
+.corner svg{width:100%;height:100%;display:block}
+
+/* page-turn corners (UO style) */
+.turn{
+  position:absolute;bottom:0;width:64px;height:64px;border:0;background:none;cursor:pointer;padding:0;z-index:2;filter:drop-shadow(1px -1px 2px rgba(0,0,0,.5));
+  opacity:.85;transition:opacity .15s, transform .15s;
+}
+.turn:hover{opacity:1;transform:scale(1.05)}
+.turn:disabled{opacity:.55;cursor:default;transform:none;filter:saturate(.4)}
+.turn:disabled path:nth-last-child(-n+2){opacity:.15}
+.turn.prev{left:0}
+.turn.next{right:0}
+.turn svg{width:100%;height:100%;display:block}
+
+/* controls */
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:.85rem}
+.controls button{
+  font:inherit;font-family:var(--serif-ja);color:#e8d7ab;background:linear-gradient(180deg,#5b3a20,#3a2312);
+  border:1px solid rgba(201,161,90,.55);border-radius:6px;padding:6px 14px;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.controls button:hover{background:linear-gradient(180deg,#6d4627,#432816)}
+.controls button:disabled{opacity:.35;cursor:default}
+.controls .pos{min-width:8em;text-align:center;font-family:var(--serif-en);letter-spacing:.05em}
+.hint{font-size:.72rem;opacity:.55}
+
+/* scroll (all pages) view */
+.all{display:none;width:min(100%,1040px);flex-direction:column;gap:16px}
+.all .spreadrow{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--paper);border-radius:6px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.5), inset 0 0 0 3px rgba(91,58,32,.9);
+}
+.all .cell{padding:26px 30px;color:var(--ink)}
+.all .cell.en{font-family:var(--serif-en);font-size:1.12rem;line-height:1.55;border-right:1px solid rgba(70,40,10,.25)}
+.all .cell.ja{font-family:var(--serif-ja);font-size:1rem;line-height:1.95;font-weight:500}
+.all .cell .pn{font-family:var(--serif-en);font-size:.75rem;color:var(--ink-soft);margin-bottom:8px}
+.all .cell p{margin:0 0 .5em;text-indent:1.2em}
+.all .cell p.cont{text-indent:0}
+body.mode-all .book{display:none}
+body.mode-all .all{display:flex}
+
+footer{font-size:.72rem;opacity:.5;text-align:center;max-width:70ch;line-height:1.6}
+
+@media (max-width:760px){
+  .book{aspect-ratio:auto;grid-template-columns:1fr;grid-template-rows:auto 14px auto;padding:18px 16px 60px;border-radius:14px}
+  .spine{background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55))}
+  .page{padding:34px 28px 46px;min-height:220px;border-radius:4px}
+  .page.left .lang,.page.left .num{left:28px}
+  .page.right .lang,.page.right .num{right:28px}
+  .page.left .body{font-size:1.18rem}
+  .page.right .body{font-size:1.08rem}
+  .all .spreadrow{grid-template-columns:1fr}
+  .all .cell.en{border-right:0;border-bottom:1px solid rgba(70,40,10,.25)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="../index.html">‹ 書架へ戻る</a>
+  <h1 id="h-title">Dimensional Travel: A Monograph</h1>
+  <div class="sub">次元間旅行論 &nbsp;/&nbsp; <span class="author">Dryus Doost, Mage</span>（魔術師ドライアス・ドゥースト）</div>
+</header>
+
+<div class="book" id="book">
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e9cf86"/><stop offset=".45" stop-color="#b8903f"/><stop offset=".6" stop-color="#d8b565"/><stop offset="1" stop-color="#7a5a22"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="corner tl" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <div class="corner tr" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <section class="page left" id="pageL">
+    <span class="lang">Original</span>
+    <div class="body" id="bodyL"></div>
+    <span class="num" id="numL"></span>
+  </section>
+  <div class="spine"></div>
+  <section class="page right" id="pageR">
+    <span class="lang">日本語訳</span>
+    <div class="body" id="bodyR"></div>
+    <span class="num" id="numR"></span>
+  </section>
+
+  <button class="turn prev" id="btnPrev" aria-label="前のページ" title="前のページ (←)">
+    <svg viewBox="0 0 64 64"><g transform="translate(0,64) scale(1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M24 38 L11 49 L24 60 Z" fill="#3a250c"/><path d="M22 42 L14 49 L22 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+  <button class="turn next" id="btnNext" aria-label="次のページ" title="次のページ (→)">
+    <svg viewBox="0 0 64 64"><g transform="translate(64,64) scale(-1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M40 38 L53 49 L40 60 Z" fill="#3a250c"/><path d="M42 42 L50 49 L42 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+</div>
+
+<div class="all" id="all"></div>
+
+<div class="controls">
+  <button id="cPrev">◀ 前へ</button>
+  <span class="pos" id="pos"></span>
+  <button id="cNext">次へ ▶</button>
+  <button id="cMode">全ページを縦に表示</button>
+</div>
+<div class="hint">← → キー、またはページ隅の折り返しでめくれます</div>
+
+<footer>
+  Original text: Ultima Online (1998) in-game book, extracted from the UO Demo server data (books/book00019.txt). 日本語訳は非公式な私訳です。
+</footer>
+
+<script>
+const BOOK = {"id": 19, "title": "Dimensional Travel: A Monograph", "author": "Dryus Doost, Mage", "jaTitle": "次元間旅行論", "jaAuthor": "魔術師ドライアス・ドゥースト", "pages": [["'Tis beyond the scope of this small monograph to discuss the details of moongates, and the manners in which they distort the fabric of reality in such a manner as to permit the passage of living flesh from place to place, world to world, or indeed from dimension to dimension."], ["Instead, allow me to bring thy attention, Gentle Reader, to the curious characteristics that are shared by certain individuals within our realm."], ["Long has it been known that the blue moongate permits travel from place to place, and none have trouble in taking this path. Yet 'tis also known, albeit only to a few, that certain individuals are unable to traverse the black moongates that permit travel from one dimension to another."], ["The noted mage and peer of our realm, Lord Blackthorn, once told me in conversation that his arcane research had indicated that the issue was one of conservation of ether."], ["To wit, given the postulate that matter within a given dimension may be but a cross-section of ethereal matter that exists in multiple dimensions, it becomes obvious that said ethereal structure cannot enter dimensions in which it is already present."], ["Imagine an individual (and the Lord Blackthorn hinted that he was one such) who exists already in some form in multiple dimensions; said individual would not be able to cross into another dimension because HE IS ALREADY THERE."], ["The implications of this are staggering, and merit further study. 'Tis well known by theorists in the field that divisions in the ethereal structure of an individual are already implicit at the temporal level, as causality forces divisions upon the ether. This is the basic operating mechanism by which white moongates function, permitting time travel."], ["As time travel is not barred by the presence of an earlier self (though encountering said earlier self can prove arcanely perilous), there must be some rigidity to the ethereal structure that bars multiple instantiations of structures from manifesting within the same context."], ["If one regards time and causal bifurcation as a web, perhaps the appropriate analogy for dimensional matrices is that of a crystalline structure, with rigid linkages."], ["The only way in which an individual such as Lord Blackthorn, who exists in multiple dimensional matrices, can cross worlds via a black moongate, would be for the entire crystalline structure of the dimension to perfectly match the ethereal resonance of the destination dimension."], ["The problem of why certain individuals are already replicated in multiple crystalline matrices is one that I fail to provide any schema for in these poor theories. It is my fondest hope that someday someone shall conquer that thorny problem and enlighten the world."]], "ja": [["月門(ムーンゲート)の詳細や、それが現実の織物をいかにして歪め、生ける肉体の場所から場所へ、世界から世界へ、あるいは次元から次元への移動を可能にしているのかについては、この小論の扱う範囲を超える。"], ["その代わり、心優しき読者諸兄には、我らが領域における特定の人物たちに共通して見られる、興味深い特性へと注意を向けていただきたい。"], ["青い月門が場所から場所への移動を可能にすることは、古くから知られており、誰もこの経路をたどるのに苦労はしない。しかし、これもまた一部の者にしか知られていないことだが、ある特定の個人は、次元から次元への移動を可能にする黒い月門を通ることができないのである。"], ["著名な魔術師であり、我らが領域の同輩でもあるロード・ブラックソーンは、かつて私との会話の中で、彼の秘術的研究が示すところによれば、この問題はエーテルの保存則に関わるものだという。"], ["すなわち、ある次元内の物質は、複数の次元にまたがって存在するエーテル的物質の断面に過ぎないという仮説に立てば、そのエーテル構造が、すでに自身が存在している次元へは入り込めないということは自明となる。"], ["ある人物(そしてロード・ブラックソーン自身がそうであると仄めかしていた)が、すでに何らかの形で複数の次元に存在していると想像してみよ。その人物は、別の次元へと渡ることができないだろう――なぜなら、彼はすでにそこに存在しているのだから。"], ["この含意は実に驚くべきものであり、さらなる研究に値する。この分野の理論家たちの間ではよく知られていることだが、個人のエーテル構造における分割は、すでに時間的な水準において暗黙のうちに存在している――因果律がエーテルに分割を強いるからだ。これこそが、時間旅行を可能にする白い月門の、基本的な作動機構である。"], ["時間旅行は、より過去の自己が存在することによって妨げられるわけではない(もっとも、その過去の自己と遭遇することは秘術的に危険を伴いうるが)。したがって、同一の文脈内に構造の複数のインスタンスが顕現することを阻む、何らかの剛性がエーテル構造に備わっているに違いない。"], ["時間と因果の分岐を一つの網と見なすならば、次元的な行列に対する適切な類推は、恐らく硬い連結を持つ結晶構造というものであろう。"], ["ロード・ブラックソーンのような、複数の次元行列に存在する人物が、黒い月門を通じて世界を渡ることのできる唯一の方法は、その次元全体の結晶構造が、目的地の次元のエーテル共鳴と完全に一致することであろう。"], ["なぜ特定の個人がすでに複数の結晶行列に複製されているのか、その理由について、この拙い理論では何ら図式を示すことができなかった。いつの日か誰かがこの厄介な問題を克服し、世界を啓蒙してくれることを、私は切に願っている。"]]};
+const N = BOOK.pages.length;         // number of text pages
+let spread = 0;                       // 0 = title page, 1..N = text pages
+const $ = id => document.getElementById(id);
+
+function paras(list){
+  return list.map((t,i)=>`<p class="${i===0 && !/^[A-Z"'“「]/.test(t.trim()) ? 'cont':''}">${esc(t)}</p>`).join('');
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function jaParas(list, enList){
+  // a JA page continues mid-sentence when the EN page does
+  return list.map((t,i)=>{
+    const cont = i===0 && enList && enList[0] && !/^[A-Z"'“「]/.test(enList[0].trim());
+    return `<p class="${cont?'cont':''}">${esc(t)}</p>`;
+  }).join('');
+}
+
+function render(){
+  const L=$('bodyL'), R=$('bodyR');
+  if(spread===0){
+    L.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.title)}</div><div class="rule"></div><div class="by">by ${esc(BOOK.author)}</div></div>`;
+    R.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.jaTitle)}</div><div class="rule"></div><div class="by">${esc(BOOK.jaAuthor)}</div></div>`;
+    $('numL').textContent=''; $('numR').textContent='';
+  }else{
+    const i=spread-1;
+    L.innerHTML=paras(BOOK.pages[i]);
+    R.innerHTML=jaParas(BOOK.ja[i], BOOK.pages[i]);
+    $('numL').textContent=`${spread} / ${N}`; $('numR').textContent=`${spread} / ${N}`;
+  }
+  $('btnPrev').disabled=$('cPrev').disabled=(spread===0);
+  $('btnNext').disabled=$('cNext').disabled=(spread===N);
+  $('pos').textContent= spread===0 ? 'Title' : `Page ${spread} / ${N}`;
+  L.scrollTop=0; R.scrollTop=0;
+  history.replaceState(null,'', spread===0 ? location.pathname : `#p${spread}`);
+}
+function go(d){ const s=Math.max(0,Math.min(N,spread+d)); if(s!==spread){spread=s;render();} }
+
+$('btnPrev').onclick=$('cPrev').onclick=()=>go(-1);
+$('btnNext').onclick=$('cNext').onclick=()=>go(1);
+document.addEventListener('keydown',e=>{
+  if(document.body.classList.contains('mode-all')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(1);e.preventDefault();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);e.preventDefault();}
+  if(e.key==='Home'){spread=0;render();}
+  if(e.key==='End'){spread=N;render();}
+});
+
+// build "all pages" view
+$('all').innerHTML = BOOK.pages.map((pg,i)=>`
+  <div class="spreadrow">
+    <div class="cell en"><div class="pn">Page ${i+1}</div>${paras(pg)}</div>
+    <div class="cell ja"><div class="pn">${i+1}ページ</div>${jaParas(BOOK.ja[i], pg)}</div>
+  </div>`).join('');
+
+$('cMode').onclick=()=>{
+  const all=document.body.classList.toggle('mode-all');
+  $('cMode').textContent= all ? '本の形で表示' : '全ページを縦に表示';
+  $('cPrev').style.visibility=$('cNext').style.visibility=$('pos').style.visibility= all?'hidden':'visible';
+};
+
+const m=location.hash.match(/^#p(\d+)$/); if(m) spread=Math.max(0,Math.min(N,+m[1]));
+render();
+</script>
+</body>
+</html>

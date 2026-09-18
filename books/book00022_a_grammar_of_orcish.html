@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Grammar of Orcish / オーク語文法 — UO NPC Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#3b2612;
+  --ink-soft:#6b4a2b;
+  --paper:#e6d6ad;
+  --paper-dark:#cdb98a;
+  --leather:#5b3a20;
+  --leather-dark:#2f1c0e;
+  --leather-light:#7c5330;
+  --gold:#c9a15a;
+  --serif-en:"IM Fell English","Palatino Linotype","Book Antiqua",Georgia,serif;
+  --serif-ja:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","MS Mincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:#151009;
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(120,80,40,.28), rgba(0,0,0,0) 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .09 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  color:#d8c9a3;
+  font-family:var(--serif-ja);
+  padding:24px 12px 48px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+header{ text-align:center; }
+header h1{
+  font-family:var(--serif-en);font-weight:normal;font-size:1.35rem;margin:0;letter-spacing:.04em;color:var(--gold);
+}
+header .sub{font-size:.85rem;opacity:.75;margin-top:4px}
+header .back{display:inline-block;font-size:.78rem;color:var(--gold);opacity:.7;text-decoration:none;margin-bottom:8px;letter-spacing:.05em}
+header .back:hover{opacity:1;text-decoration:underline}
+header .sub .author{font-family:var(--serif-en)}
+
+/* ---- Book ---- */
+.book{
+  position:relative;
+  width:min(100%, 960px);
+  aspect-ratio: 960 / 580;
+  border-radius:14px 22px 22px 14px;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--leather-light), transparent 55%),
+    linear-gradient(135deg, var(--leather) 0%, #4a2e18 50%, var(--leather-dark) 100%);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.65),
+    0 4px 10px rgba(0,0,0,.6),
+    inset 0 0 0 3px rgba(0,0,0,.35),
+    inset 0 0 0 5px rgba(201,161,90,.25);
+  padding:26px 30px;
+  display:grid;
+  grid-template-columns:1fr 26px 1fr;
+  user-select:text;
+}
+.book::before{ /* leather grain */
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .16 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  mix-blend-mode:multiply;
+}
+.spine{
+  background:linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55));
+  border-radius:4px;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.8);
+}
+.page{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>"),
+    var(--paper);
+  color:var(--ink);
+  padding:38px 42px 46px;
+  overflow:hidden;
+  box-shadow: inset 0 0 40px rgba(120,80,30,.35), 0 0 2px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;
+}
+.page.left{
+  border-radius:6px 2px 2px 6px;
+  background-image:
+    linear-gradient(90deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page.right{
+  border-radius:2px 6px 6px 2px;
+  background-image:
+    linear-gradient(270deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page .lang{
+  position:absolute;top:12px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;
+  font-family:var(--serif-en);
+}
+.page.left .lang{left:42px}
+.page.right .lang{right:42px}
+.page .body{flex:1;overflow:auto;scrollbar-width:thin}
+.page.left .body{font-family:var(--serif-en);font-size:1.58rem;line-height:1.5}
+.page.right .body{font-family:var(--serif-ja);font-size:1.28rem;line-height:1.9;font-weight:500}
+.page p{margin:0 0 .55em;text-indent:1.4em;text-wrap:pretty}
+.page p.cont{text-indent:0}
+.page.right p{text-indent:1em}
+.page .num{
+  position:absolute;bottom:16px;font-family:var(--serif-en);font-size:.85rem;color:var(--ink-soft);
+}
+.page.left .num{left:42px}
+.page.right .num{right:42px}
+
+/* title page */
+.page .titlepage{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;padding-bottom:20px;
+}
+.page .titlepage .t{font-size:1.7rem;line-height:1.3}
+.page.left .titlepage .t{font-family:var(--serif-en)}
+.page.right .titlepage .t{font-family:var(--serif-ja);font-weight:500}
+.page .titlepage .by{font-size:1rem;color:var(--ink-soft)}
+.page.left .titlepage .by{font-family:var(--serif-en);font-style:italic}
+.page .titlepage .rule{width:40%;height:1px;background:linear-gradient(90deg,transparent,var(--ink-soft),transparent);opacity:.7}
+
+/* brass corner fittings (top, decorative) */
+.corner{position:absolute;top:0;width:64px;height:64px;pointer-events:none;opacity:.95;z-index:2;filter:drop-shadow(1px 1px 2px rgba(0,0,0,.5))}
+.corner.tl{left:0}
+.corner.tr{right:0;transform:scaleX(-1)}
+.corner svg{width:100%;height:100%;display:block}
+
+/* page-turn corners (UO style) */
+.turn{
+  position:absolute;bottom:0;width:64px;height:64px;border:0;background:none;cursor:pointer;padding:0;z-index:2;filter:drop-shadow(1px -1px 2px rgba(0,0,0,.5));
+  opacity:.85;transition:opacity .15s, transform .15s;
+}
+.turn:hover{opacity:1;transform:scale(1.05)}
+.turn:disabled{opacity:.55;cursor:default;transform:none;filter:saturate(.4)}
+.turn:disabled path:nth-last-child(-n+2){opacity:.15}
+.turn.prev{left:0}
+.turn.next{right:0}
+.turn svg{width:100%;height:100%;display:block}
+
+/* controls */
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:.85rem}
+.controls button{
+  font:inherit;font-family:var(--serif-ja);color:#e8d7ab;background:linear-gradient(180deg,#5b3a20,#3a2312);
+  border:1px solid rgba(201,161,90,.55);border-radius:6px;padding:6px 14px;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.controls button:hover{background:linear-gradient(180deg,#6d4627,#432816)}
+.controls button:disabled{opacity:.35;cursor:default}
+.controls .pos{min-width:8em;text-align:center;font-family:var(--serif-en);letter-spacing:.05em}
+.hint{font-size:.72rem;opacity:.55}
+
+/* scroll (all pages) view */
+.all{display:none;width:min(100%,1040px);flex-direction:column;gap:16px}
+.all .spreadrow{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--paper);border-radius:6px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.5), inset 0 0 0 3px rgba(91,58,32,.9);
+}
+.all .cell{padding:26px 30px;color:var(--ink)}
+.all .cell.en{font-family:var(--serif-en);font-size:1.12rem;line-height:1.55;border-right:1px solid rgba(70,40,10,.25)}
+.all .cell.ja{font-family:var(--serif-ja);font-size:1rem;line-height:1.95;font-weight:500}
+.all .cell .pn{font-family:var(--serif-en);font-size:.75rem;color:var(--ink-soft);margin-bottom:8px}
+.all .cell p{margin:0 0 .5em;text-indent:1.2em}
+.all .cell p.cont{text-indent:0}
+body.mode-all .book{display:none}
+body.mode-all .all{display:flex}
+
+footer{font-size:.72rem;opacity:.5;text-align:center;max-width:70ch;line-height:1.6}
+
+@media (max-width:760px){
+  .book{aspect-ratio:auto;grid-template-columns:1fr;grid-template-rows:auto 14px auto;padding:18px 16px 60px;border-radius:14px}
+  .spine{background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55))}
+  .page{padding:34px 28px 46px;min-height:220px;border-radius:4px}
+  .page.left .lang,.page.left .num{left:28px}
+  .page.right .lang,.page.right .num{right:28px}
+  .page.left .body{font-size:1.18rem}
+  .page.right .body{font-size:1.08rem}
+  .all .spreadrow{grid-template-columns:1fr}
+  .all .cell.en{border-right:0;border-bottom:1px solid rgba(70,40,10,.25)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="../index.html">‹ 書架へ戻る</a>
+  <h1 id="h-title">A Grammar of Orcish</h1>
+  <div class="sub">オーク語文法 &nbsp;/&nbsp; <span class="author">Yorick o'Skara Brae</span>（ヨリック・オスカラブレー）</div>
+</header>
+
+<div class="book" id="book">
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e9cf86"/><stop offset=".45" stop-color="#b8903f"/><stop offset=".6" stop-color="#d8b565"/><stop offset="1" stop-color="#7a5a22"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="corner tl" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <div class="corner tr" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <section class="page left" id="pageL">
+    <span class="lang">Original</span>
+    <div class="body" id="bodyL"></div>
+    <span class="num" id="numL"></span>
+  </section>
+  <div class="spine"></div>
+  <section class="page right" id="pageR">
+    <span class="lang">日本語訳</span>
+    <div class="body" id="bodyR"></div>
+    <span class="num" id="numR"></span>
+  </section>
+
+  <button class="turn prev" id="btnPrev" aria-label="前のページ" title="前のページ (←)">
+    <svg viewBox="0 0 64 64"><g transform="translate(0,64) scale(1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M24 38 L11 49 L24 60 Z" fill="#3a250c"/><path d="M22 42 L14 49 L22 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+  <button class="turn next" id="btnNext" aria-label="次のページ" title="次のページ (→)">
+    <svg viewBox="0 0 64 64"><g transform="translate(64,64) scale(-1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M40 38 L53 49 L40 60 Z" fill="#3a250c"/><path d="M42 42 L50 49 L42 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+</div>
+
+<div class="all" id="all"></div>
+
+<div class="controls">
+  <button id="cPrev">◀ 前へ</button>
+  <span class="pos" id="pos"></span>
+  <button id="cNext">次へ ▶</button>
+  <button id="cMode">全ページを縦に表示</button>
+</div>
+<div class="hint">← → キー、またはページ隅の折り返しでめくれます</div>
+
+<footer>
+  Original text: Ultima Online (1998) in-game book, extracted from the UO Demo server data (books/book00022.txt). 日本語訳は非公式な私訳です。
+</footer>
+
+<script>
+const BOOK = {"id": 22, "title": "A Grammar of Orcish", "author": "Yorick o'Skara Brae", "jaTitle": "オーク語文法", "jaAuthor": "ヨリック・オスカラブレー", "pages": [["This volume, and others in the series, are sponsored by Lord Blackthorn, ever a supporter of understanding the other sentient races of Britannia."], ["The Orcish tongue may fall unpleasingly 'pon the ear, yet it has within it a complex grammar oft misunderstood by those who merely hear the few broken words of English our orcish brothers manage without education."], ["These are the basic rules of orcish:", "Orcish has five tenses: present, past, future imperfect, present interjectional, and prehensile."], ["Examples: gugroflu, gugrofloog, gugrobo, gugroglu!, gugrogug."], ["All transitive verbs in the prehensile tense end in \"ug.\"", "Examples: urgleighug, biggugdaghgug, curdakalmug."], ["All present interjectional conjugations start with the letter G unless they contain the third declensive accent of the letter U.", "Examples: ghothudunglug, but not azhbuugub."], ["The past tense can only refer to events since the last meal, but the prehensile tense can refer to any event within reach.", "The present tense is conjugated like the future imperfect tense, when the interrogative mode is used by pitching the sound a quarter-tone higher."], ["Orcish hath no concept of person, as in first person, third person, I, we, etc."], ["Orcish grammar relies upon the three cardinal rules of accretion, prefixing, and agglutination, in addition to pitch. In the former, phonemes combine into larger words which may contain full phrasal significance. In the second, prefixing specific phonetic sounds changes the subject of the sentence into object, interrogative, addressed individual, or dinner."], ["Agglutination occurs whenever four of the same letter are present in a word, in which case, any two of them may be removed or slurred."], ["Pitch changes the phoneme value of individual syllables, thus completely altering what a word may mean. The classic example is \"Aktgluthugrot bigglogubuu dargilgaglug lublublub\" which can mean \"You are such a pretty girl,\" \"My mother ate your primroses,\" or \"Jellyfish nose paints alms potato,\" depending on pitch."], ["Orcish poetry often relies upon repeating the same phrase in multiple pitches, even changing pitch midword. None of this great art is translatable."], ["The orcish language uses the following vowels: ab, ad, ag, akt, at, augh, auh, azh, e, i, o, oo, u, uu. The vowel sound a is not recognized as a vowel and does not exist in their alphabet."], ["The orcish alphabet is best learned using the classic rhyme repeated at 23 different pitches: (A translation of the first pitch follows):"], ["Lugnog ghu blat suggaroglug, Gaghbuu dakdar ab highugbo, Gothnogbuim ad gilgubbugbuilug Bilgeaugh thurggulg stuiggro!"], ["Eat food, the first letter is ab, Kill people, next letter is ad, I forget the rest But augh is in there somewhere!", "THE END"]], "ja": [["本書、および同シリーズの他の巻は、ブリタニアに棲む他の知性ある種族への理解を、常に支持してこられたロード・ブラックソーンからの寄付により刊行された。"], ["オーク語は耳に心地よく響く言葉ではないかもしれないが、その内には複雑な文法が備わっている――それは、教育を受けていないオークの同胞たちが操るわずかばかりの片言の英語しか耳にしたことのない者には、しばしば誤解されているのだが。"], ["以下は、オーク語の基本規則である。", "オーク語には五つの時制がある――現在、過去、未来不完了、現在感嘆、そして把持である。"], ["例：gugroflu、gugrofloog、gugrobo、gugroglu！、gugrogug。"], ["把持時制のすべての他動詞は「ug」で終わる。", "例：urgleighug、biggugdaghgug、curdakalmug。"], ["現在感嘆形の活用はすべて文字Gで始まる――ただし文字Uの第三変化アクセントを含む場合を除く。", "例：ghothudunglug。ただしazhbuugubは例外。"], ["過去時制は直前の食事以来の出来事しか指すことができないが、把持時制は手の届く範囲のあらゆる出来事を指すことができる。", "現在時制は未来不完了時制と同じように活用されるが、疑問法を用いる際には音を四分音高く発音する。"], ["オーク語には人称という概念が存在しない――一人称、三人称、私、我々、といった区別もない。"], ["オーク語の文法は、音程に加えて、結合、接頭、そして膠着という三つの基本規則に依っている。前者においては、音素が結合してより大きな単語となり、句全体の意味を含むことがある。後者においては、特定の音を接頭させることで、文の主語を目的語、疑問形、呼びかけの対象、あるいは夕食へと変えることができる。"], ["膠着は、単語内に同じ文字が四つ連続する場合に生じ、その場合、そのうち任意の二つを省略、あるいは曖昧に発音してよい。"], ["音程は個々の音節の音素的価値を変化させ、単語の意味をまったく別のものに変えてしまう。古典的な例は「Aktgluthugrot bigglogubuu dargilgaglug lublublub」であり、音程次第で「なんて可愛い娘だ」「私の母がお前のサクラソウを食べた」あるいは「くらげの鼻が施しのじゃがいもを塗る」のいずれをも意味しうる。"], ["オークの詩はしばしば、同じ句を異なる音程で繰り返すことに依っており、単語の途中で音程を変えることさえある。この偉大な芸術は、いずれも翻訳不可能である。"], ["オーク語は次の母音を用いる：ab、ad、ag、akt、at、augh、auh、azh、e、i、o、oo、u、uu。母音の音aは母音として認識されておらず、彼らのアルファベットには存在しない。"], ["オーク語のアルファベットを学ぶ最良の方法は、23通りの異なる音程で繰り返される古典的な詩である(以下は、最初の音程での翻訳である)。"], ["Lugnog ghu blat suggaroglug, Gaghbuu dakdar ab highugbo, Gothnogbuim ad gilgubbugbuilug Bilgeaugh thurggulg stuiggro!"], ["食え、最初の文字はabだ、殺せ、次の文字はadだ、あとは忘れた、だがaughはどこかにあったはずだ！", "おわり"]]};
+const N = BOOK.pages.length;         // number of text pages
+let spread = 0;                       // 0 = title page, 1..N = text pages
+const $ = id => document.getElementById(id);
+
+function paras(list){
+  return list.map((t,i)=>`<p class="${i===0 && !/^[A-Z"'“「]/.test(t.trim()) ? 'cont':''}">${esc(t)}</p>`).join('');
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function jaParas(list, enList){
+  // a JA page continues mid-sentence when the EN page does
+  return list.map((t,i)=>{
+    const cont = i===0 && enList && enList[0] && !/^[A-Z"'“「]/.test(enList[0].trim());
+    return `<p class="${cont?'cont':''}">${esc(t)}</p>`;
+  }).join('');
+}
+
+function render(){
+  const L=$('bodyL'), R=$('bodyR');
+  if(spread===0){
+    L.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.title)}</div><div class="rule"></div><div class="by">by ${esc(BOOK.author)}</div></div>`;
+    R.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.jaTitle)}</div><div class="rule"></div><div class="by">${esc(BOOK.jaAuthor)}</div></div>`;
+    $('numL').textContent=''; $('numR').textContent='';
+  }else{
+    const i=spread-1;
+    L.innerHTML=paras(BOOK.pages[i]);
+    R.innerHTML=jaParas(BOOK.ja[i], BOOK.pages[i]);
+    $('numL').textContent=`${spread} / ${N}`; $('numR').textContent=`${spread} / ${N}`;
+  }
+  $('btnPrev').disabled=$('cPrev').disabled=(spread===0);
+  $('btnNext').disabled=$('cNext').disabled=(spread===N);
+  $('pos').textContent= spread===0 ? 'Title' : `Page ${spread} / ${N}`;
+  L.scrollTop=0; R.scrollTop=0;
+  history.replaceState(null,'', spread===0 ? location.pathname : `#p${spread}`);
+}
+function go(d){ const s=Math.max(0,Math.min(N,spread+d)); if(s!==spread){spread=s;render();} }
+
+$('btnPrev').onclick=$('cPrev').onclick=()=>go(-1);
+$('btnNext').onclick=$('cNext').onclick=()=>go(1);
+document.addEventListener('keydown',e=>{
+  if(document.body.classList.contains('mode-all')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(1);e.preventDefault();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);e.preventDefault();}
+  if(e.key==='Home'){spread=0;render();}
+  if(e.key==='End'){spread=N;render();}
+});
+
+// build "all pages" view
+$('all').innerHTML = BOOK.pages.map((pg,i)=>`
+  <div class="spreadrow">
+    <div class="cell en"><div class="pn">Page ${i+1}</div>${paras(pg)}</div>
+    <div class="cell ja"><div class="pn">${i+1}ページ</div>${jaParas(BOOK.ja[i], pg)}</div>
+  </div>`).join('');
+
+$('cMode').onclick=()=>{
+  const all=document.body.classList.toggle('mode-all');
+  $('cMode').textContent= all ? '本の形で表示' : '全ページを縦に表示';
+  $('cPrev').style.visibility=$('cNext').style.visibility=$('pos').style.visibility= all?'hidden':'visible';
+};
+
+const m=location.hash.match(/^#p(\d+)$/); if(m) spread=Math.max(0,Math.min(N,+m[1]));
+render();
+</script>
+</body>
+</html>
