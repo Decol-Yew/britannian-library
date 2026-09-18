@@ -76,7 +76,7 @@ header .sub .author{font-family:var(--serif-en)}
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>"),
     var(--paper);
   color:var(--ink);
-  padding:34px 38px 44px;
+  padding:46px 50px 54px;
   overflow:hidden;
   box-shadow: inset 0 0 40px rgba(120,80,30,.35), 0 0 2px rgba(0,0,0,.5);
   display:flex;flex-direction:column;
@@ -99,19 +99,19 @@ header .sub .author{font-family:var(--serif-en)}
   position:absolute;top:12px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;
   font-family:var(--serif-en);
 }
-.page.left .lang{left:38px}
-.page.right .lang{right:38px}
+.page.left .lang{left:50px}
+.page.right .lang{right:50px}
 .page .body{flex:1;overflow:auto;scrollbar-width:thin}
-.page.left .body{font-family:var(--serif-en);font-size:1.38rem;line-height:1.5}
-.page.right .body{font-family:var(--serif-ja);font-size:1.12rem;line-height:1.9;font-weight:500}
+.page.left .body{font-family:var(--serif-en);font-size:1.58rem;line-height:1.5}
+.page.right .body{font-family:var(--serif-ja);font-size:1.28rem;line-height:1.9;font-weight:500}
 .page p{margin:0 0 .55em;text-indent:1.4em;text-wrap:pretty}
 .page p.cont{text-indent:0}
 .page.right p{text-indent:1em}
 .page .num{
-  position:absolute;bottom:14px;font-family:var(--serif-en);font-size:.85rem;color:var(--ink-soft);
+  position:absolute;bottom:16px;font-family:var(--serif-en);font-size:.85rem;color:var(--ink-soft);
 }
-.page.left .num{left:38px}
-.page.right .num{right:38px}
+.page.left .num{left:50px}
+.page.right .num{right:50px}
 
 /* title page */
 .page .titlepage{
@@ -174,11 +174,11 @@ footer{font-size:.72rem;opacity:.5;text-align:center;max-width:70ch;line-height:
 @media (max-width:760px){
   .book{aspect-ratio:auto;grid-template-columns:1fr;grid-template-rows:auto 14px auto;padding:18px 16px 60px;border-radius:14px}
   .spine{background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55))}
-  .page{padding:30px 22px 40px;min-height:220px;border-radius:4px}
-  .page.left .lang,.page.left .num{left:22px}
-  .page.right .lang,.page.right .num{right:22px}
-  .page.left .body{font-size:1.05rem}
-  .page.right .body{font-size:.95rem}
+  .page{padding:34px 28px 46px;min-height:220px;border-radius:4px}
+  .page.left .lang,.page.left .num{left:28px}
+  .page.right .lang,.page.right .num{right:28px}
+  .page.left .body{font-size:1.18rem}
+  .page.right .body{font-size:1.08rem}
   .all .spreadrow{grid-template-columns:1fr}
   .all .cell.en{border-right:0;border-bottom:1px solid rgba(70,40,10,.25)}
 }
