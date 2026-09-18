@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Burning of Trinsic / トリンシックの炎上 — UO NPC Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#3b2612;
+  --ink-soft:#6b4a2b;
+  --paper:#e6d6ad;
+  --paper-dark:#cdb98a;
+  --leather:#5b3a20;
+  --leather-dark:#2f1c0e;
+  --leather-light:#7c5330;
+  --gold:#c9a15a;
+  --serif-en:"IM Fell English","Palatino Linotype","Book Antiqua",Georgia,serif;
+  --serif-ja:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","MS Mincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:#151009;
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(120,80,40,.28), rgba(0,0,0,0) 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .09 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  color:#d8c9a3;
+  font-family:var(--serif-ja);
+  padding:24px 12px 48px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+header{ text-align:center; }
+header h1{
+  font-family:var(--serif-en);font-weight:normal;font-size:1.35rem;margin:0;letter-spacing:.04em;color:var(--gold);
+}
+header .sub{font-size:.85rem;opacity:.75;margin-top:4px}
+header .back{display:inline-block;font-size:.78rem;color:var(--gold);opacity:.7;text-decoration:none;margin-bottom:8px;letter-spacing:.05em}
+header .back:hover{opacity:1;text-decoration:underline}
+header .sub .author{font-family:var(--serif-en)}
+
+/* ---- Book ---- */
+.book{
+  position:relative;
+  width:min(100%, 960px);
+  aspect-ratio: 960 / 580;
+  border-radius:14px 22px 22px 14px;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--leather-light), transparent 55%),
+    linear-gradient(135deg, var(--leather) 0%, #4a2e18 50%, var(--leather-dark) 100%);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.65),
+    0 4px 10px rgba(0,0,0,.6),
+    inset 0 0 0 3px rgba(0,0,0,.35),
+    inset 0 0 0 5px rgba(201,161,90,.25);
+  padding:26px 30px;
+  display:grid;
+  grid-template-columns:1fr 26px 1fr;
+  user-select:text;
+}
+.book::before{ /* leather grain */
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .16 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  mix-blend-mode:multiply;
+}
+.spine{
+  background:linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55));
+  border-radius:4px;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.8);
+}
+.page{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>"),
+    var(--paper);
+  color:var(--ink);
+  padding:38px 42px 46px;
+  overflow:hidden;
+  box-shadow: inset 0 0 40px rgba(120,80,30,.35), 0 0 2px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;
+}
+.page.left{
+  border-radius:6px 2px 2px 6px;
+  background-image:
+    linear-gradient(90deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page.right{
+  border-radius:2px 6px 6px 2px;
+  background-image:
+    linear-gradient(270deg, transparent 88%, rgba(70,40,10,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 30%, transparent 80%, rgba(0,0,0,.05)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .13 0'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
+}
+.page .lang{
+  position:absolute;top:12px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;
+  font-family:var(--serif-en);
+}
+.page.left .lang{left:42px}
+.page.right .lang{right:42px}
+.page .body{flex:1;overflow:auto;scrollbar-width:thin}
+.page.left .body{font-family:var(--serif-en);font-size:1.58rem;line-height:1.5}
+.page.right .body{font-family:var(--serif-ja);font-size:1.28rem;line-height:1.9;font-weight:500}
+.page p{margin:0 0 .55em;text-indent:1.4em;text-wrap:pretty}
+.page p.cont{text-indent:0}
+.page.right p{text-indent:1em}
+.page .num{
+  position:absolute;bottom:16px;font-family:var(--serif-en);font-size:.85rem;color:var(--ink-soft);
+}
+.page.left .num{left:42px}
+.page.right .num{right:42px}
+
+/* title page */
+.page .titlepage{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;padding-bottom:20px;
+}
+.page .titlepage .t{font-size:1.7rem;line-height:1.3}
+.page.left .titlepage .t{font-family:var(--serif-en)}
+.page.right .titlepage .t{font-family:var(--serif-ja);font-weight:500}
+.page .titlepage .by{font-size:1rem;color:var(--ink-soft)}
+.page.left .titlepage .by{font-family:var(--serif-en);font-style:italic}
+.page .titlepage .rule{width:40%;height:1px;background:linear-gradient(90deg,transparent,var(--ink-soft),transparent);opacity:.7}
+
+/* brass corner fittings (top, decorative) */
+.corner{position:absolute;top:0;width:64px;height:64px;pointer-events:none;opacity:.95;z-index:2;filter:drop-shadow(1px 1px 2px rgba(0,0,0,.5))}
+.corner.tl{left:0}
+.corner.tr{right:0;transform:scaleX(-1)}
+.corner svg{width:100%;height:100%;display:block}
+
+/* page-turn corners (UO style) */
+.turn{
+  position:absolute;bottom:0;width:64px;height:64px;border:0;background:none;cursor:pointer;padding:0;z-index:2;filter:drop-shadow(1px -1px 2px rgba(0,0,0,.5));
+  opacity:.85;transition:opacity .15s, transform .15s;
+}
+.turn:hover{opacity:1;transform:scale(1.05)}
+.turn:disabled{opacity:.55;cursor:default;transform:none;filter:saturate(.4)}
+.turn:disabled path:nth-last-child(-n+2){opacity:.15}
+.turn.prev{left:0}
+.turn.next{right:0}
+.turn svg{width:100%;height:100%;display:block}
+
+/* controls */
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:.85rem}
+.controls button{
+  font:inherit;font-family:var(--serif-ja);color:#e8d7ab;background:linear-gradient(180deg,#5b3a20,#3a2312);
+  border:1px solid rgba(201,161,90,.55);border-radius:6px;padding:6px 14px;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.controls button:hover{background:linear-gradient(180deg,#6d4627,#432816)}
+.controls button:disabled{opacity:.35;cursor:default}
+.controls .pos{min-width:8em;text-align:center;font-family:var(--serif-en);letter-spacing:.05em}
+.hint{font-size:.72rem;opacity:.55}
+
+/* scroll (all pages) view */
+.all{display:none;width:min(100%,1040px);flex-direction:column;gap:16px}
+.all .spreadrow{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--paper);border-radius:6px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.5), inset 0 0 0 3px rgba(91,58,32,.9);
+}
+.all .cell{padding:26px 30px;color:var(--ink)}
+.all .cell.en{font-family:var(--serif-en);font-size:1.12rem;line-height:1.55;border-right:1px solid rgba(70,40,10,.25)}
+.all .cell.ja{font-family:var(--serif-ja);font-size:1rem;line-height:1.95;font-weight:500}
+.all .cell .pn{font-family:var(--serif-en);font-size:.75rem;color:var(--ink-soft);margin-bottom:8px}
+.all .cell p{margin:0 0 .5em;text-indent:1.2em}
+.all .cell p.cont{text-indent:0}
+body.mode-all .book{display:none}
+body.mode-all .all{display:flex}
+
+footer{font-size:.72rem;opacity:.5;text-align:center;max-width:70ch;line-height:1.6}
+
+@media (max-width:760px){
+  .book{aspect-ratio:auto;grid-template-columns:1fr;grid-template-rows:auto 14px auto;padding:18px 16px 60px;border-radius:14px}
+  .spine{background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.55))}
+  .page{padding:34px 28px 46px;min-height:220px;border-radius:4px}
+  .page.left .lang,.page.left .num{left:28px}
+  .page.right .lang,.page.right .num{right:28px}
+  .page.left .body{font-size:1.18rem}
+  .page.right .body{font-size:1.08rem}
+  .all .spreadrow{grid-template-columns:1fr}
+  .all .cell.en{border-right:0;border-bottom:1px solid rgba(70,40,10,.25)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="../index.html">‹ 書架へ戻る</a>
+  <h1 id="h-title">The Burning of Trinsic</h1>
+  <div class="sub">トリンシックの炎上 &nbsp;/&nbsp; <span class="author">Paladin Japheth</span>（パラディン、ジャフェス）</div>
+</header>
+
+<div class="book" id="book">
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e9cf86"/><stop offset=".45" stop-color="#b8903f"/><stop offset=".6" stop-color="#d8b565"/><stop offset="1" stop-color="#7a5a22"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="corner tl" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <div class="corner tr" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+    </svg>
+  </div>
+  <section class="page left" id="pageL">
+    <span class="lang">Original</span>
+    <div class="body" id="bodyL"></div>
+    <span class="num" id="numL"></span>
+  </section>
+  <div class="spine"></div>
+  <section class="page right" id="pageR">
+    <span class="lang">日本語訳</span>
+    <div class="body" id="bodyR"></div>
+    <span class="num" id="numR"></span>
+  </section>
+
+  <button class="turn prev" id="btnPrev" aria-label="前のページ" title="前のページ (←)">
+    <svg viewBox="0 0 64 64"><g transform="translate(0,64) scale(1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M24 38 L11 49 L24 60 Z" fill="#3a250c"/><path d="M22 42 L14 49 L22 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+  <button class="turn next" id="btnNext" aria-label="次のページ" title="次のページ (→)">
+    <svg viewBox="0 0 64 64"><g transform="translate(64,64) scale(-1,-1)"><path d="M0 0 H54 Q42 10 30 30 Q10 42 0 54 Z" fill="url(#brass)" stroke="#3a250c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M2 2 H48 Q38 11 27 27 Q11 38 2 48 Z" fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.4" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="32" cy="7" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/>
+      <circle cx="7" cy="32" r="2" fill="#5a3d12" stroke="#f0dc9a" stroke-width=".9"/></g>
+      <path d="M40 38 L53 49 L40 60 Z" fill="#3a250c"/><path d="M42 42 L50 49 L42 56 Z" fill="#f6e7b4"/></svg>
+  </button>
+</div>
+
+<div class="all" id="all"></div>
+
+<div class="controls">
+  <button id="cPrev">◀ 前へ</button>
+  <span class="pos" id="pos"></span>
+  <button id="cNext">次へ ▶</button>
+  <button id="cMode">全ページを縦に表示</button>
+</div>
+<div class="hint">← → キー、またはページ隅の折り返しでめくれます</div>
+
+<footer>
+  Original text: Ultima Online (1998) in-game book, extracted from the UO Demo server data (books/book00003.txt). 日本語訳は非公式な私訳です。
+</footer>
+
+<script>
+const BOOK = {"id": 3, "title": "The Burning of Trinsic", "author": "Paladin Japheth", "jaTitle": "トリンシックの炎上", "jaAuthor": "パラディン、ジャフェス", "pages": [["'Twas a sight to see, the sunlight falling lightly on the sandstone walls of Trinsic 'pon a morning in spring."], ["Children ran along the parapets and walkways, their laughter and running providing music to the daybreak, despite their oft-ragged clothing."], ["The guards who maintained a vigilant outlook from atop the towers would smile indulgently as children slammed into their armored legs and brushed past them."], ["And I was one of those young ones, letting my joy rise up to the skies.", "Little did we all know of the darker days that would lie ahead, for we were too young."], ["Had we but gained access to the quiet councils held in the Paladin tower as it faced the sea, councils lit by candlelight and worry, we would have learned more of the fears of imminent attack from the forest,"], ["where foul creatures born of dank caves and darkness were marauding ever more often into the lands around Trinsic's moat."], ["But we were children! The parapets and the moat were places to play, not stout defenses, and we gave no thought to the necessities that must have required their construction."], ["We used to reach the sheltered orchards on the lee side of the parapet walls, where the southern river cut through the city, by swimming across the water."], ["The rich folk who lived in the great manses there would shout from their windows and shake their fists, for we would run through their gardens and tear up the delicate foxgloves and orfleurs with our unshod dirty feet."], ["Then we would dive into the water and splash merrily to the fruit trees.", "The southern river lazily slid under an ungated arch in the mighty wall, and we would lay on the grassy bank and watch it gurgle by the lily pads."], ["That spring that pleasant spot became the doorway through which our city of Trinsic let in the monstrous deformed humanoids that savaged us."], ["I lay upon that grassy bank and watched them wade in, their coarse hair wet and matted, algae and muck festooning their wild brows."], ["They caught sight of a quicksilver girl with bright blond hair and lively eyes. Her name was Leyla, and that spring I had held fond dreams of holding her hand and sharing flavored ice while dangling our feet off the small bridge by Smugglers Gate."], ["And I said nothing when they caught her, and did not cry out when they dragged her off through that breach in our wall, and did not warn the city when I saw the helmeted orc captains call the charge upon the mansions."], ["Blame me not, for I was but a child, and one who hid in the branches of the peach trees, all a-tremble whilst I watched the smoke rise from Sean the tailor's, and fire lash out at the roof of witchy Eleanor's tavern."], ["To this day I have had no word of Leyla, and to this day the smell of burning wood can conjure terrible dreams."], ["Yet with the eyes of adulthood, 'tis possible to examine the flaws in the defense of Trinsic on that fateful day, and the reasons why our walls are now double-thick, and why our buildings are now built as fortresses within a somber fortified city."], ["While I can look out from the top of the new Paladin tower, and spy the mighty white sails across the barrier island, and can descry the small hollow south of the city where gypsies are wont to camp, I can also envision the city as it might be burning, and I bless the bargain we made: space for safety, grace for sturdiness, and wood for stone."], ["Whilst I live, I shall not see Trinsic burn, and no more cries of little girls will haunt the sleep of our fair citizens.", "This is mine oath, as I live and breathe.", "- Japheth, Paladin Guildmaster of the City of Trinsic"]], "ja": [["それは目にも麗しい光景だった――春のある朝、トリンシックの砂岩の壁に陽光が柔らかく降り注いでいたのだ。"], ["子供たちは胸壁や通路を駆け回り、そのぼろ布のような服にもかかわらず、笑い声と足音が夜明けに音楽を添えていた。"], ["塔の上から油断なく見張りを続ける衛兵たちは、子供たちがその鎧の脚にぶつかったり、脇をすり抜けたりするのを、大目に見て微笑んでいたものだ。"], ["そして私も、その幼い一人であり、喜びを天へと舞い上がらせていた。", "その先に待つ暗い日々のことなど、私たちは誰も知る由もなかった――あまりに幼かったのだから。"], ["もし私たちが、海に面したパラディンの塔で開かれていた、蝋燭の灯と憂慮に照らされた静かな評議会に立ち会えていたなら、森からの襲撃が差し迫っているという恐れについて、もっと多くを知ったことだろう――"], ["じめじめとした洞窟と闇から生まれた邪悪な生き物たちが、トリンシックの堀の周りの土地へと、ますます頻繁に略奪に押し寄せていたのだから。"], ["しかし私たちは子供だった！胸壁と堀は、頑丈な防御施設ではなく遊び場であり、その建造に必要だったであろう事情など、私たちは考えもしなかった。"], ["私たちはいつも、南の川が街を貫いて流れる胸壁の風下側にある、木陰に守られた果樹園まで、水を泳いで渡っていたものだ。"], ["そこの壮麗な邸宅に住む裕福な人々は、窓から怒鳴り、拳を振り上げたものだった――私たちが素足の汚れた足で庭を駆け抜け、繊細なジギタリスやオルフルールを踏み荒らしたからだ。"], ["それから私たちは水に飛び込み、陽気に水しぶきを上げながら果樹のもとへと向かった。", "南の川は、巨大な壁の開かずの門の下をのんびりと流れ抜け、私たちはその草の生えた岸辺に寝そべって、睡蓮の間を流れる水を眺めていたものだ。"], ["その春、あの心地よい場所は、我らがトリンシックの街に、私たちを打ちのめすことになる怪物じみた醜い人型生物どもを招き入れる戸口へと変わってしまった。"], ["私はあの草の岸辺に横たわり、彼らが水を渡ってくるのを眺めていた――その粗い髪は濡れてもつれ、その野蛮な額には藻と泥がまとわりついていた。"], ["彼らは、明るい金髪と生き生きとした瞳を持つ、水銀のような少女に目を留めた。彼女の名はレイラといい、その春、密輸人の門のそばの小さな橋から足をぶらぶらさせながら、彼女と手をつなぎ、味のついた氷を分け合う夢を、私は密かに抱いていたのだった。"], ["そして、彼らが彼女を捕らえた時も、私は何も言わなかった。彼らが我らの壁の裂け目を通して彼女を引きずり去った時も、私は声を上げなかった。兜をかぶったオークの隊長たちが邸宅群への突撃を号令するのを見た時も、私は街に警告しなかった。"], ["私を責めないでほしい。私はただの子供であり、桃の木の枝に隠れ、仕立屋ショーンの店から煙が立ち上るのを、そして魔女エレノアの酒場の屋根に炎が舐めつくすのを、震えながら見つめていた者に過ぎなかったのだから。"], ["今日に至るまで、レイラの消息は聞いていない。そして今日に至るまで、木が燃える匂いは、恐ろしい夢を呼び起こすことがある。"], ["しかし大人の目を持つ今なら、あの運命の日のトリンシックの防御にあった欠陥を、そして今や私たちの壁が二重の厚みを持ち、私たちの建物が陰鬱な要塞都市の中の要塞として建てられている理由を、検討することができる。"], ["新しいパラディンの塔の頂から見渡せば、防壁島の向こうに雄大な白い帆を望むことができ、街の南に、ジプシーたちがよく野営する小さな窪地を見つけることもできる。しかし同時に、私は街が燃える様をも思い描くことができる――そして私たちが交わした取引を祝福する。空間を安全と引き換えに、優美さを頑丈さと引き換えに、そして木を石と引き換えに。"], ["私が生きている限り、トリンシックが燃えるのを見ることはないだろう。そしてもはや、幼い少女の叫びが、我らが麗しき市民たちの眠りを苛むこともないだろう。", "これは、私が生きて息をする限りの誓いである。", "――ジャフェス、トリンシック市パラディン・ギルドマスター"]]};
+const N = BOOK.pages.length;         // number of text pages
+let spread = 0;                       // 0 = title page, 1..N = text pages
+const $ = id => document.getElementById(id);
+
+function paras(list){
+  return list.map((t,i)=>`<p class="${i===0 && !/^[A-Z"'“「]/.test(t.trim()) ? 'cont':''}">${esc(t)}</p>`).join('');
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function jaParas(list, enList){
+  // a JA page continues mid-sentence when the EN page does
+  return list.map((t,i)=>{
+    const cont = i===0 && enList && enList[0] && !/^[A-Z"'“「]/.test(enList[0].trim());
+    return `<p class="${cont?'cont':''}">${esc(t)}</p>`;
+  }).join('');
+}
+
+function render(){
+  const L=$('bodyL'), R=$('bodyR');
+  if(spread===0){
+    L.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.title)}</div><div class="rule"></div><div class="by">by ${esc(BOOK.author)}</div></div>`;
+    R.innerHTML=`<div class="titlepage"><div class="t">${esc(BOOK.jaTitle)}</div><div class="rule"></div><div class="by">${esc(BOOK.jaAuthor)}</div></div>`;
+    $('numL').textContent=''; $('numR').textContent='';
+  }else{
+    const i=spread-1;
+    L.innerHTML=paras(BOOK.pages[i]);
+    R.innerHTML=jaParas(BOOK.ja[i], BOOK.pages[i]);
+    $('numL').textContent=`${spread} / ${N}`; $('numR').textContent=`${spread} / ${N}`;
+  }
+  $('btnPrev').disabled=$('cPrev').disabled=(spread===0);
+  $('btnNext').disabled=$('cNext').disabled=(spread===N);
+  $('pos').textContent= spread===0 ? 'Title' : `Page ${spread} / ${N}`;
+  L.scrollTop=0; R.scrollTop=0;
+  history.replaceState(null,'', spread===0 ? location.pathname : `#p${spread}`);
+}
+function go(d){ const s=Math.max(0,Math.min(N,spread+d)); if(s!==spread){spread=s;render();} }
+
+$('btnPrev').onclick=$('cPrev').onclick=()=>go(-1);
+$('btnNext').onclick=$('cNext').onclick=()=>go(1);
+document.addEventListener('keydown',e=>{
+  if(document.body.classList.contains('mode-all')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(1);e.preventDefault();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);e.preventDefault();}
+  if(e.key==='Home'){spread=0;render();}
+  if(e.key==='End'){spread=N;render();}
+});
+
+// build "all pages" view
+$('all').innerHTML = BOOK.pages.map((pg,i)=>`
+  <div class="spreadrow">
+    <div class="cell en"><div class="pn">Page ${i+1}</div>${paras(pg)}</div>
+    <div class="cell ja"><div class="pn">${i+1}ページ</div>${jaParas(BOOK.ja[i], pg)}</div>
+  </div>`).join('');
+
+$('cMode').onclick=()=>{
+  const all=document.body.classList.toggle('mode-all');
+  $('cMode').textContent= all ? '本の形で表示' : '全ページを縦に表示';
+  $('cPrev').style.visibility=$('cNext').style.visibility=$('pos').style.visibility= all?'hidden':'visible';
+};
+
+const m=location.hash.match(/^#p(\d+)$/); if(m) spread=Math.max(0,Math.min(N,+m[1]));
+render();
+</script>
+</body>
+</html>
