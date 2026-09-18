@@ -6,8 +6,10 @@ site = here.parent; (site / "books").mkdir(parents=True, exist_ok=True)
 def slug(t):
     return re.sub(r"[^a-z0-9]+", "_", t.lower()).strip("_")
 
+ids = sorted(int(p.stem[4:]) for p in (here.parent / "data" / "en").glob("book*.json"))
+
 books = []
-for i in range(1, 27):
+for i in ids:
     en = json.loads((here.parent / "data" / "en" / f"book{i:05d}.json").read_text())
     jp = here.parent / "data" / "ja" / f"book{i:05d}.json"
     ja = json.loads(jp.read_text()) if jp.exists() else None
